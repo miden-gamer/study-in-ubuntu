@@ -1,0 +1,133 @@
+RUN PYTHON PROGRAMS IN UBUNTU
+
+
+
+1. Check if Python is installed:
+
+Open a terminal (Ctrl + Alt + T), and type:
+
+```bash
+$ python3 --version
+```
+
+Example Output:
+
+```text 
+Python 3.14.4
+```
+
+If you see a version number, Python is installed.
+
+
+2. Create a Python file:
+
+```bash
+$ nano hello.py
+```
+
+Add the following code:
+
+```python
+print("Hello, Ubuntu!")
+```
+
+Save the file:
+
+. Press [Ctrl + O] then [Enter]
+. Press [Ctrl + X] to exit
+
+
+3. Run the program:
+
+In the terminal navigate to the folder containing the file:
+
+```bash
+$ cd path/to/your/file
+```
+
+Then run:
+
+```bash
+$ python3 hello.py
+```
+
+Output:
+
+```text
+Hello, Ubuntu!
+```
+
+4. Make the script executable:
+
+Add this as the first line of your Python file:
+
+```python
+#!/usr/bin/env python3
+```
+
+Make it executable:
+
+```bash
+chmod +x hello.py
+```
+
+Run it directly:
+
+```bash
+./hello.py
+```
+
+
+5. Install Python (if required):
+
+If "python3" is not installed:
+
+```bash
+sudo apt update
+sudo apt install python3
+```
+
+To install "pip (Python package manager):
+
+```bash
+sudo apt install python3-pip
+```
+
+Check:
+
+```bash
+pip3 --version
+```
+
+
+6. (Optional) Use a Virtual Environment:
+
+For projects, it's recommended to use a Virtual Environment:
+
+```bash
+python3 -m venv myenv
+source myenv/bin/activate
+```
+
+You'll see the environment name in your terminal prompt. To leave it:
+
+```bash
+deactivate
+```
+
+
+SUMMARY OF COMMAN COMMANDS:
+
+Task					Command
+
+Check Python version			python3 --version
+Run a program				python3 filename.py
+Install Python				sudo apt install python3
+Install pip				sudo apt install python3-pip
+Create Virtual Environment		python3 -m venv myenv
+Activate Virtual Environment		sourve myenv/bin/activate
+Deactivate Virtual Environment		deactivate
+
+
+
++ Q-1. Explain more on Virtual Environment.

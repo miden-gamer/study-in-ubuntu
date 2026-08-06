@@ -1,0 +1,241 @@
+|  7. FILE HANDLING  |
+
+
+
+Key Concepts:
+    |
+    | Files, their Types and File Paths
+    | Opening and Closing Files
+    | Reading, Writing and Appending Data
+    | File, Directory and OS Module Methods
+
+
+
+7.1 INTRODUCTION
+
+A file is a collection of data stored on a secondary storage device like hard 
+disk. ...
+
+{Important Point-Outs: "NONE"}
+
+
+
+7.2 FILE PATH
+
+Files that we use ...
+
+{
+    Important Point-Outs:
+
+    1. The file path is also known as "pathname".
+    2. Folder names and file names are case sensitive in Linux but case 
+       insensitive in Windows.
+    3. The character used to seperate the folder names (also called the 
+       "delimiter") is specific to file system. For example, Solaris OS uses 
+       the forward slash (/) while Windows uses backslash (\).
+    4. A 'relative path' is specified to the program's current working 
+       directory.
+}
+
+
+
+7.3 TYPES OF FILES
+
+Like C and C++, Python also supports two types of files - text files and binary 
+files.
+
+- 7.3.1 ASCII TEXT FILES
+
+A "text file" is a stream of characters that can be sequentially processed by a 
+computer in forward direction.
+
+{
+    Important Point-Outs:
+
+    1. Depending on the requirements of the operating system and on the 
+       operation that has to be performed (read/write operation) on the file, 
+       the newline characters may be converted to or from 
+       carriage-return/linefeed combinations. Besides this, other character 
+       conversions may also be done to satisfy the storage requirements of the 
+       operating system. However, these conversions occur transparently to 
+       process a text file.
+    2. When data is written to a text file, each newline character is converted 
+       to a carriage return/linefeed character. Similarly, when data is read 
+       from a text file, each carriage return/linefeed character is converted 
+       to newline character.
+    3. When a text file is used, there are actually two representations of data 
+       - internal or external. For example, an integer value will be 
+       represented as a number that occupies 2 or 4 bytes of memory internally 
+       but externally the integer value will be represented as a string of 
+       characters representing its decimal or hexadecimal value.
+    4. In a text file, each line of data ends with a newline character. Each 
+       file ends with a special character called the end-of-file (EOF) marker.
+
+- 7.3.2 BINARY FILES
+
+A "binary file is a file which may contain any type of data, encoded in binary 
+form for computer storage and processing purposes. ...
+
+{ Important Point-Outs: NONE }
+
+
+
+7.4 OPENING AND CLOSING FILES
+
+Python has many in-built functions and methods to manipulate files. These 
+functions and methods basically work on a file object.
+
+- 7.4.1 THE open() FUNCTION
+
+Before reading from or writing to a file, you must first open it using 
+Python's built-in open() function. This function creates a file object, which 
+will be used to invoke methods associated with it. The syntax of open() is:
+
+```python
+fileObj = open("file_name", "access_mode")
+```
+
+Here,
+file_name is a string value that specifies name of file that you want to 
+access.
+access_mode indicates the mode in which file has to be opened, i.e., read, 
+write, append etc. TABLE 7.1 lists other possible values of access mode 
+argument.
+The open() function returns a file object. This file object will be used to 
+read, write or perform any other operation on file. It works like a file 
+handle. ...
+
+... NOTE: Access mode is an optional parameter and the default file access mode is 
+read (r). ...
+
+... TABLE 7.1: Access Modes:
+
+Mode	Purpose
+
+r	This is the default mode of opening a file which opens the file for 
+	reading only. This file pointer is placed at the beginning of the file.
+
+rb	This mode opens a file for reading only in binary format. The file 
+	pointer is placed at the beginning of the file.
+
+r+	This mode opens a file for both reading and writing. The file pointer is 
+	placed at the beginning of the file.
+
+rb+	This mode opens the file for both reading and writing in binary format. 
+	The file pointer is placed at the beginning of the file.
+
+w	This mode opens the file for writing only. When a file is opened in w 
+	mode, two things can happen. If the file does not exist, a new file is 
+	created for writing. If the file already exists and has some data 
+	stored in it, the contents are overwritten.
+
+wb	Opens a file in binary format for writing only. When a file is opened 
+	in this mode, two things can happen. If the file does not exist, a new 
+	file is created for writing. If the file already exists and has some 
+	data in it, the contents are overwritten.
+
+w+	Opens the file for both writing and reading. When a file is is opened 
+	in this mode, two things can happen. If the file does not exist, a new 
+	file is created for reading as well as writing. If the file already 
+	exists and has some data stored in it, the contents are overwritten.
+
+wb+	Opens a file in binary format for both reading and writing. When a file 
+	is opened in this mode, two things can happen. If the file does not 
+	exist, a new file is created for reading as well as writing. If the 
+	file already exists and has some data stored in it, the contents are 
+	overwritten.
+
+a	Opens a file for appending. The file pointer is placed at the end of 
+	the file if file exists. If the file does not exist, it creates a new 
+	file for writing.
+
+ab	Opens a file in binary format for appending. The file pointer is placed 
+	at the end of the file if file exists. If the file does not exist, it 
+	creates a new file for writing.
+
+a+	Opens a file for both reading and appending. The file pointer is placed 
+	at the end of the file if file exists, If the file does not exist, it 
+	creates a new file for reading and writing.
+
+ab+	Opens a file in binary format for both reading and appending. The file 
+	pointer is placed at the end of the file if the file exists. If the 
+	file does not exist, a new file is created for both reading and 
+	writing.
+
+- 7.4.2 THE FILE OBJECT ATTRIBUTES
+
+... TABLE 7.2: File Object Attributes:
+
+Attribute		Information Obtained
+
+fileObj.closed		Returns True if the file is closed and False otherwise.
+fileObj.mode		Returns access mode with which file has been opened.
+fileObj.name		Returns name of the file.
+
+EXAMPLE 7.1 : Program to open a file and print its attribute values.
+
+```python
+file = open("example-files/file-1.txt", "wb")
+print("Name of the file:", file.name)
+print("File is closed.", file.closed)
+print("File has been opened in", file.mode, "mode.")
+```
+[REFER "./programs/program-b-e1.py"]
+
+Example's Output:
+
+```text
+Name of the file: ./example-files/file-1.txt
+File is closed. False
+File has been opened in wb mode.
+```
+
+- 7.4.3 THE close() METHOD
+
+The close() method as the name suggests is used to close the file object. ... 
+While closing the file object close() flushes any unwritten information (means 
+transfer data to file that was supposed to be written in the file but has not 
+yet been transfered). Although, Python automatically closes a file when the 
+reference object of a file is reassigned to another file, ... The syntax of 
+close() is,
+
+```python
+fileObj.close()
+```
+
+The close() method frees up system resources such as file descriptors, file 
+locks, etc. that are associated with file. ...
+
+... EXAMPLE 7.2 : Program to access a file after it is closed.
+
+```python
+file = open(./example-files/file-1.txt", "wb")
+print("Name of the file: ", file.name)
+print("File is closed.", file.closed)
+print("File is now being closed.. You cannot use the File Object.")
+file.close()
+print("File is closed.", file.closed)
+print(file.read())
+```
+
+Example's Output:
+
+```text
+Name of the file: ./example-files/file-1.txt
+File is closed. False
+File is now being closed.. You cannot use the File Object.
+File is closed. True
+Traceback (most recent call last):
+  File "home/.../program-b-e2.py", line 10, in <module>
+    print(file.read())
+          ~~~~~~~~~^^
+io.UnsupportedOperation: read
+```
+
+NOTE: Python has a garbage collectore to clean up unreferenced objects but 
+still it is our responisibility to close the file and release the resources 
+consumed by it.
+
+
+
+7.5 READING AND WRITING FILES
