@@ -239,3 +239,73 @@ consumed by it.
 
 
 7.5 READING AND WRITING FILES
+
+The read() and write() are used to read data from file and write data to files 
+respectively. ...
+
+... - 7.5.1 write() AND writelines() METHODS
+
+... the write() method does not add a newline character ('\n') to the end of 
+the string. The syntax of write() is:
+
+```python
+fileObj.write(string)
+```
+
+As per the syntax, the string passed as an argument to the write() is written 
+into the opened file.
+
+EXAMPLE 7.3 : Program that writes a message in the file, file-1.txt
+
+```python
+file = open("./example-files/file-1.txt", "w")
+file.write("Hello, This is the \"file-1.txt\".")
+file.close()
+print("Data written into the file......")
+```
+
+Example's Output:
+
+```text
+Data written into the file......
+```
+
+NOTE: The write method returns None.
+
+... The writelines() method is used to write a list of strings.
+
+EXAMPLE 7.4 : Program to write to a file using the writelines() method
+
+```python
+file = open("./example-files/file-2.txt", "w")
+lines = ["This is line 1.\n", "This is line 2.", " In continuation to line 2."]
+file.writelines(lines)
+file.close()
+print("Data written to file......")
+```
+
+Example's Output
+
+```text
+Data written to file......
+```
+
+- 7.5.2 append() METHOD
+
+... EXAMPLE 7.5 : Program to append data to an already existing file
+
+```python
+file = open("./example-files/file-2.txt", "a")
+lines = ["\nThis is line 3.", "\nThis is line 4."]
+file.writelines(lines)
+file.close()
+print("Data appended into file......")
+```
+
+Example's Output
+
+```text
+Data appended into file......
+```
+
+

@@ -1,0 +1,313 @@
+How to do cut, copy and paste operations in VIM?
+
+
+
+Vim Terminology:
+
+. Cut - d (delete)
+. Copy - y (yank)
+. Paster - p/P
+
+The important thing is that these commands work in Normal mode.
+
+
+
+1. Cut (Delete)
+
+- Cut the current line:
+
+```vim
+dd
+```
+
+Example:
+
+```text
+Hello
+World
+VIM
+```
+
+Put the cursor anywhere on "World" and press:
+
+```vim
+dd
+```
+
+Result:
+
+```text
+Hello
+VIM
+```
+
+The deleted "World" is stored in VIM's register, so you can paste it anywhere.
+
+- Cut Multiple Lines:
+
+```vim
+3dd
+```
+
+Cuts 3 lines starting from current line, you can replace 3 with any number.
+
+- Cut a Word:
+
+```vim
+dw
+```
+
+Deletes from the cursor to the beginning of the next word.
+
+
+
+2. Copy (Yank)
+
+VIM calls copying, yanking.
+
+- Copy the current line:
+
+```vim
+yy
+```
+
+You can also write:
+
+```vim
+y
+```
+
+- Copy multiple lines:
+
+```vim
+3yy
+```
+
+Copies 3 lines.
+
+For example:
+
+```text
+Line 1
+Line 2
+Line 3
+Line 4
+```
+
+Place the cursor on "line 2" and press:
+
+```vim
+3yy
+```
+
+Now Lines 2-4 are copied.
+
+
+
+3. Copy Selected Text
+
+This is where "Visual mode" becomes very useful.
+
+Press:
+
+```vim
+v
+```
+
+Then move the cursor to select the text.
+For example:
+
+```text
+This is some text.
+     ^^^^^^^^^
+```
+
+Once selected press:
+
+```vim
+y
+```
+
+That yanks/copies the selection.
+
+- Visual Line Mode:
+
+For selecting complete lines, use:
+
+```vim
+V
+```
+
+Then move "j"/"k" to select lines and press:
+
+```vim
+y
+```
+
+- Visual Block Mode:
+
+For rectangular selections:
+
+```vim
+Ctrl-v
+```
+
+Then move the cursor and press:
+
+```vim
+y
+```
+
+
+
+4. Paste
+
+There are two main paste commands:
+
+- Paste after the cursor (lowercase p):
+
+```vim
+p
+```
+
+- Paste before the cursor (uppercase P):
+
+```vim
+P
+```
+
+
+
+5. Example: Copy and Paste a Line
+
+Suppose you have:
+
+```text
+Hello
+World
+VIM
+```
+
+Put the cursor on "World".
+Press:
+
+```vim
+yy
+```
+
+Now "World" is copied.
+Move to "VIM" and press:
+
+```vim
+p
+```
+
+You get:
+
+```text
+Hello
+World
+VIM
+World
+```
+
+
+
+6. Example: Cut and Paste a Line
+
+Suppose:
+
+```text
+Apple
+Banana
+Cherry
+```
+
+Put the cursor on "Banana".
+
+```vim
+dd
+```
+
+Now:
+
+```text
+Apple
+Cherry
+```
+
+Move to "Cherry" and press:
+
+```vim
+p
+```
+
+Result:
+
+```text
+Apple
+Cherry
+Banana
+```
+
+
+
+7. Most Useful Combinations
+
+You can think of VIM's operators as building blocks.
+
+LINES:
+
+dd		Cut/delete current line
+3dd		Cut 3 lines
+yy		Copy current line
+3yy		Copy 3 lines
+p		Paste after (lowercase p)
+P		Paste before (uppercase P)
+
+WORDS:
+
+dw		Delete/Cut word
+yw		Yank/Copy word
+
+CHARACTERS:
+
+x		Delete/Cut character under cursor ! Same as "dl"
+X		Delete/Cut character before cursor ! Same as "dh"
+
+SELECTED TEXT:
+
+v		Character-wise selection
+V		Line-wise selection
+Ctrl-v		Block selection
+
+y		Copy selected text
+d		Cut or delete selected text
+
+
+
+8. A Very Important VIM Concept
+
+You will see this pattern everywhere in VIM:
+
+"operator + motion"
+
+For example:
+
+d + w = dw
+y + w = yw
+
+d means "delete", and y means "yank".
+
+So,
+
+d + w -> Delete a word.
+d + d -> Delete a line.
+y + w -> Copy a word.
+y + y -> Copy a line.
+
+
+
+NOTE: VIM's "dd" is technically "delete", but because the deleted text goes 
+into a register, it behaves like "cut" when you subsequently use "p" or "P" to 
+put it somewhere else.
