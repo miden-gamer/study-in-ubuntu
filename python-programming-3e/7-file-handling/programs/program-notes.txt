@@ -1,0 +1,7 @@
+PROGRAM NAMING STYLE:
+
+1. program-b-e1.py [Program from Book, Example NO.1]
+2. program-b-ee1.py [Program from Book, Extra Example NO.1]
+3. program-b-ee1-1.py [Program from Book, Extra Example NO.1, part 1]
+4. program-b-p1.py [Program from Book, Program NO.1]
+5. temp-program.py [Program to run once and clear or to try a extra program]
