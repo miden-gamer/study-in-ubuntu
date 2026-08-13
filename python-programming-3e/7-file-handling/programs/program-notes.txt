@@ -5,3 +5,5 @@ PROGRAM NAMING STYLE:
 3. program-b-ee1-1.py [Program from Book, Extra Example NO.1, part 1]
 4. program-b-p1.py [Program from Book, Program NO.1]
 5. temp-program.py [Program to run once and clear or to try a extra program]
+6. program-bb-m1.py [Program Based on Book context, from My side (Not in book), NO.1]
+7. program-bb-m1-1.py [Program Based On Book context, from My side (not in book), NO.1, part 1]

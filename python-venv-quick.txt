@@ -1,0 +1,23 @@
+# Create
+python3 -m venv .venv
+
+# Activate
+source .venv/bin/activate
+
+# Install Package
+python -m pip install package_name
+
+# Show Installed Packages
+python -m pip list
+
+# Save Dependencies
+python -m pip freeze > requirements.txt
+
+# Install Dependencies
+python -m pip install -r requirements.txt
+
+# Leave Environment
+deactivate
+
+# Run Programs
+python program_name.py
