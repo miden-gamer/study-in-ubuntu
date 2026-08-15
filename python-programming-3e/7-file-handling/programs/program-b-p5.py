@@ -3,15 +3,15 @@
 
 from pathlib import Path
 
-folder = Path(__file__).parent / "example-files"
+directory = Path(__file__).parent / "example-files"
 
 print("Available files:")
-for file in folder.iterdir():
+for file in directory.iterdir():
     if file.is_file():
         print(file.name)
 
 filename = input("\nEnter the filename of file to be opened: ")
-source_file = folder / filename
+source_file = directory / filename
 
 with open(source_file) as file:
     text = file.read()
