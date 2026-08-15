@@ -2,4 +2,4 @@ This line has newline at end.
 This line has newline and two spaces at end.  
 This line has newline and two tabs at end.      
 
-This line is line number five. Fourth is blank line.
+This line is line number five! Fourth is blank line. This line has newline and three exclamatory marks at end.!!!

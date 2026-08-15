@@ -1,4 +1,4 @@
-# MY SIDE PROGRAM - 7.6 (I) : To show the use of rstrip() method, (By default removes spaces, newlines and tabs from right of lines.)
+# MY SIDE PROGRAM - 7.6(II) : To show the use of rstrip() method, (Remove newline and !)
 
 # Path is Python's cross-platform way of working with file and directory paths.
 # __file__ gives the path of this Python program, and .parent gives its directory.
@@ -10,6 +10,6 @@ from pathlib import Path
 file_path = Path(__file__).parent / "example-files" / "file-6.txt"
 
 # Actual Program
-with open(file_path, "r") as file:  # Uses "file-6.txt"
+with open(file_path, "r") as file:
     for line in file:
-        print(line.rstrip())
+        print(line.rstrip("\n!"))
