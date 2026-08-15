@@ -10,6 +10,6 @@ from pathlib import Path
 file_path = Path(__file__).parent / "example-files" / "file-6.txt"
 
 # Actual Program
-with open(file_path, "r") as file:
+with open(file_path, "r") as file:  # Uses "file-6.txt"
     for line in file:
         print(line.rstrip("\n!"))
