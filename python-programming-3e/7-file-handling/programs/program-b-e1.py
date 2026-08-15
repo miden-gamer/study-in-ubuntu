@@ -5,9 +5,9 @@
 # so the file is found relative to the program's location, regardless of
 # the current working directory or whether the program runs on Windows/Linux.
 from pathlib import Path
+
 file_path = Path(__file__).parent / "example-files" / "file-1.txt"
 
-# Actual Program
 file = open(file_path, "wb")  # Uses "file-1.txt"
 print("Name of the file:", file.name)
 print("Name of the file (using file_path object):", file_path.name)

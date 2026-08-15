@@ -7,3 +7,4 @@ PROGRAM NAMING STYLE:
 5. temp-program.py [Program to run once and clear or to try a extra program]
 6. program-bb-m1.py [Program Based on Book context, from My side (Not in book), NO.1]
 7. program-bb-m1-1.py [Program Based On Book context, from My side (not in book), NO.1, part 1]
+8. program-b-e1-iv.py [Program from Book, Example NO.1, improved version]

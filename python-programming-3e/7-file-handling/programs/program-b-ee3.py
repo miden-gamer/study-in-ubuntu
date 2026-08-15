@@ -4,6 +4,7 @@
 # Opening a single file using command line argument
 
 import sys
+
 with open(sys.argv[1]) as file:
     for line in file:
         print(line, end = "")
