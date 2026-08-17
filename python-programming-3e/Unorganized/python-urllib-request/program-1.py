@@ -35,3 +35,7 @@ print(res.getheaders()) # returns a list with header and its value as tuple
 # get a particular header detail
 print("\nContent-Type Header:")
 print(res.getheader('Content-Type')) # pass header key as argument to .getheader()
+
+# Close response
+res.close()
+print("\nResponse Closed?", res.closed)

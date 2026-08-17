@@ -139,5 +139,75 @@ Path("file.txt").chmod(0o644)
 
 So, in practice main approaches are:
 --------------------------------------------------------------------------------
+# Octal
+os.chmod("file.txt", 0o644)
 
+# stat constants
+os.chmod("file.txt", stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH)
+
+# Modify existing permissions
+mode = os.stat("file.txt").st_mode
+os.chmod("file.txt", mode | stat.S_IXUSR)
+
+# pathlib
+Path("file.txt").chmod(0o644)
 --------------------------------------------------------------------------------
+
+**Important Point: chmod() behaves differently across OS. On Linux/Unix, these 
+permission bits are meaningful; on Windows only a subset of chmod behavior is 
+supported.** (! TO BE VERIFIED)
+
++ Directory Permissions  (! Requires more confirmation and study)
+
+For file:
+Permission		Meaning
+
+r				Read file contents
+w				Modify file contents
+x				Execute file
+
+For directory:
+Permission		Meaning
+r				List the directory's contents
+w				Create/delete/rename entries inside it
+x				Enter or traverse the directory
+
+Program changing permissions and restoring them:
+--------------------------------------------------------------------------------
+import os
+import stat
+
+old_permissions = stat.S_IMODE(os.stat("file.txt").st_mode)
+
+os.chmod("file.txt", 0o600)
+
+# Later
+os.chmod("file.txt", old_permissions)
+--------------------------------------------------------------------------------
+
+stat.S_IMODE => This extracts just the permission portion.
+e.g.:	st_mode -> 33206 -- S_IMODE() --> 644
+
+# BOOK:
+
+================================================================================
+# import stat
+
+stat.S_IRUSR  # Read, user
+stat.S_IWUSR  # Write, user
+stat.S_IXUSR  # Execute, user
+
+stat.S_IRGRP  # Read, group
+stat.S_IWGRP  # Write, group
+stat.S_IXGRP  # Execute, group
+
+stat.S_IROTH  # Read, other
+stat.S_IWOTH  # Write, other
+stat.S_IXOTH  # Execute, other
+
+---
+
+stat.S_IRWXU  # Read, write, execute for user
+stat.S_IRWXG  # Read, write, execute for group
+stat.S_IRWXO  # Read, write, execute for other
+================================================================================
