@@ -1,0 +1,143 @@
+# After, ../../7-file-handling/programs/program-b-ee8.py
+
+. SET FILE PERMISSIONS (CHMOD)
+
+In Python, os.chmod() lets you change the permission bits of a file or directory.
+
+--------------------------------------------------------------------------------
+import os
+
+os.chmod("file.txt", mode)
+--------------------------------------------------------------------------------
+
+1. Read, write, execute permissions
+
+There are 3 permission categories:
+
+. Owner/User -> S_IRUSR, S_IWUSR, S_IXUSR
+. Group -> S_IRGRP, S_IWGRP, S_IXGRP
+. Others -> S_IROTH, S_IWOTH, S_IXOTH
+
+And 3 basic permissions:
+
+Read -> r
+Write -> w
+Execute -> x
+
+For example:
+--------------------------------------------------------------------------------
+import os
+import stat
+
+os.chmod(
+	"file.txt",
+	stat.S_IRUSR | stat.S_IWUSR
+)
+--------------------------------------------------------------------------------
+
+This gives the owner:
+rw-------
+
+2. Common Permission Combinations
+
+Python			Permission				Octal
+
+stat.S_IRUSR	Owner Read				400
+stat.S_IWUSR	Owner Write				200
+stat.S_IXUSR	Owner Execute			100
+stat.S_IRGRP	Group Read				040
+stat.S_IWGRP	Group Write				020
+stat.S_IXGRP	Group Execute			010
+stat.S_IROTH	Other Read				004
+stat.S_IWOTH	Other Write				002
+stat.S_IXOTH	Other Execute			001
+
+
+You combine them with |
+
+For example:
+--------------------------------------------------------------------------------
+import os
+import stat
+
+os.chmod(
+	"file.txt",
+	stat.S_IRUSR |
+	stat.S_IWUSR |
+	stat.S_IRGRP |
+	stat.S_IROTH
+)
+--------------------------------------------------------------------------------
+
+Equivalent to:
+rw-r--r--
+
+3. Using octal values directly
+
+This is probably most common way to use chmod():
+--------------------------------------------------------------------------------
+os.chmod("file.txt", 0o777)
+--------------------------------------------------------------------------------
+
+Some common modes:
+0o777 -> rwxrwxrwx
+0o755 -> rwxr-xr-x
+0o700 -> rwx------
+0o644 -> rw-r--r--
+0o600 -> rw-------
+0o400 -> r--------
+0o200 -> -w-------
+0o100 -> --x------
+
+4. Important: chmod() does not simply mean "set these permissions"
+
+The numeric mode also contains special permission bits.
+Python's "stat" module provides:
+
+stat.S_ISUID -> set-user-ID
+stat.S_ISGID -> set-group-ID
+stat.S_ISVTX -> sticky bit
+
+For example:
+--------------------------------------------------------------------------------
+os.chmod("file.txt", 0o4775)
+--------------------------------------------------------------------------------
+
+Here:
+4 -> setuid
+775 -> rwxr-xr-x
+
+5. Changing only one permission
+
+You can read the current mode, modify a bit, and then write it back.
+For example, add owner execute permission without changing other permissions:
+--------------------------------------------------------------------------------
+import os
+import stat
+
+current = os.stat("file.txt").stat_mode
+os.chmod("file.txt", current | stat.S_IXUSR)
+--------------------------------------------------------------------------------
+
+Remove owner execute:
+--------------------------------------------------------------------------------
+current = os.stat("file.txt").stat_mode
+os.chmod("file.txt", current & ~stat.S_IXUSR)
+--------------------------------------------------------------------------------
+
+This technique is useful when you don't want to overwrite the existing 
+permissions.
+
+6. pathlib Version
+
+You can also use Path.chmod():
+--------------------------------------------------------------------------------
+from pathlib import Path
+
+Path("file.txt").chmod(0o644)
+--------------------------------------------------------------------------------
+
+So, in practice main approaches are:
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------

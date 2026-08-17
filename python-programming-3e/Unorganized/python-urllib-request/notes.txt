@@ -1,0 +1,50 @@
+urllib Package
+
+Internet has many web pages and we use web browser to access the  information 
+from those webpages.
+We enter the URL into the address bar of web browser.
+
+URL stands for "Uniform Resource Locator".
+e.g. "https://www.faceboook.com/users/user1/profile?edit_image=1&auth=1"
+It includes information like:
+Protocol -> http or https,
+followed by host name which is the website's main domain name,
+e.g. "https://www.facebook.com/"
+              ^^^^^^^^^^^^^^^^
+usually all URL should also have port number,
+e.g. "https://www.facebook.com:443/"
+                               ^^^
+to specify the port on which the request is being served, but web browsers by 
+default send request to port 80 if it's using http protocol else port 443 if 
+it's using https protocol and that's why we don't need to explicitly specify 
+port number, after port number (or in above example, after the host name), we 
+may have path or query parameters, path comes in the form of directory like 
+structure where each directory is separated by forward slash from each other,
+e.g. "https://www.facebook.com/users/user1/profile"
+                               ^^^^^^^^^^^^^^^^^^^
+and we may have query parameters in form of (key=value) pairs,
+e.g. "https://www.facebook.com/users/user1/profile?edit_image=1&auth=1"
+                                                  ^^^^^^^^^^^^^^^^^^^^
+if there are more than one query parameters they may be separated from each 
+other using ampersand symbol (&).
+
+[
+    urllib is a package that collects several modules for working with URLs:
+
+    - "urllib.request" for opening and reading URLs
+    - "urllib.error" containing the exceptions raised by "urllib.request"
+    - "urllib.parse" for parsing URLs
+    - "urllib.robotparser" for parsing "robots.txt" files
+    (robots.txt is the file used by search engines for crawling website)
+]
+
+... Response Codes:
+
+Error Code		Description
+
+2xx				Success
+3xx				Request Redirected
+4xx				Client Error
+5xx				Server Error
+
+# Skipping "urllib" in depth.
