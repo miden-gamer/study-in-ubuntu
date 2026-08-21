@@ -249,6 +249,7 @@ except Exception as e:
 # Try to change ownership
 # ------------------------------------------------------------
 
+print("\nPerforming ownership change operation......")
 change_ownership(
     file_path,
     requested_user="miden",
