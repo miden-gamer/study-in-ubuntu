@@ -1,0 +1,4 @@
+Process & Job Management
+(ps . top . kill . jobs . tmux . nohup)
+
+

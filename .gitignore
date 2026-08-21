@@ -9,3 +9,6 @@
 
 # VS Code Settings
 .vscode/
+
+# tmux log files
+tmux-*.log
