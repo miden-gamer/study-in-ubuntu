@@ -1,0 +1,1 @@
+/home/infin/study/python-programming-3e/7-file-handling/programs/example-files/file-10.txt

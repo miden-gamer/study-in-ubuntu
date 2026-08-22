@@ -1,0 +1,200 @@
+Working on XML in Python
+
+3. Python's XML Module
+
+Python includes the standard library module:
+(book-tree.py)
+--------------------------------------------------------------------------------
+import xml.etree.ElementTree as ET
+--------------------------------------------------------------------------------
+
+ElementTree is one of the easiest ways to work with XML.
+The important concept is:
+
+XML Document
+  |
+Element Tree
+  |
+Elements
+  |
+Tags, attributes, text, children
+
+
+4. Creating XML data in Python
+
+Let's create this XML:
+(book.xml)
+--------------------------------------------------------------------------------
+<book>
+	<name>Python Programming Using Problem Solving Approach</name>
+	<edition>3</edition>
+	<author>Reema Thareja</author>
+	<publisher>Oxford University Press</publisher>
+	<price>560.00</price>
+</book>
+--------------------------------------------------------------------------------
+
+Python:
+(book-tree.py)
+--------------------------------------------------------------------------------
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+book = ET.Element("book")
+
+name = ET.SubElement(book, "name")
+name.text = "Python Programming Using Problem Solving Approach"
+
+edition = ET.SubElement(book, "edition")
+edition.text = "3"
+
+author = ET.SubElement(book, "author")
+author.text = "Reema Thareja"
+
+publisher = ET.SubElement(book, "publisher")
+publisher.text = "Oxford University Press"
+
+price = ET.SubElement(book, "price")
+price.text = "560.00"
+
+tree = ET.ElementTree(book)
+xml_file_path = Path(__file__).parent / "files" / "book.xml"
+tree.write(xml_file_path)
+--------------------------------------------------------------------------------
+
+This creates: "./files/book.xml"
+
+
+5. Understanding 'Element'
+
+This:
+(book-tree.py)
+--------------------------------------------------------------------------------
+book = ET.Element("book")
+--------------------------------------------------------------------------------
+
+creates an XML element:
+(book.xml)
+--------------------------------------------------------------------------------
+<book></book>
+--------------------------------------------------------------------------------
+
+Then:
+(book-tree.py)
+--------------------------------------------------------------------------------
+name = ET.SubElement(book, "name")
+--------------------------------------------------------------------------------
+
+creates a child:
+(book.xml)
+--------------------------------------------------------------------------------
+<book>
+	<name></name>
+</book>
+--------------------------------------------------------------------------------
+
+And:
+(book-tree.py)
+--------------------------------------------------------------------------------
+name.text = "Python Programing Using Problem Solving Approach"
+--------------------------------------------------------------------------------
+
+gives:
+(book.xml)
+--------------------------------------------------------------------------------
+<book>
+	<name>Python Programming Using Problem Solving Approach</name>
+</book>
+--------------------------------------------------------------------------------
+
+So the basic pattern is:
+(python)
+--------------------------------------------------------------------------------
+element = ET.Element("tag")
+--------------------------------------------------------------------------------
+
+for creating a root element,
+and:
+(python)
+--------------------------------------------------------------------------------
+child = ET.SubElement(parent, "tag")
+--------------------------------------------------------------------------------
+
+for creating a child.
+
+
+6. XML Attributes
+
+Adding attributes at time of creating element:
+(python)
+--------------------------------------------------------------------------------
+element = ET.Element(
+	"tag",
+	{"key1": "value1", ... "keyN": "valueN"}
+)
+--------------------------------------------------------------------------------
+
+or, assign attributes after creating element:
+(book-tree.py)
+--------------------------------------------------------------------------------
+book.set("chapters", "12")
+--------------------------------------------------------------------------------
+
+
+7. Reading an XML file
+
+(book-tree-read.py)
+--------------------------------------------------------------------------------
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+xml_file_path = Path(__file__).parent / "files" / "book.xml"
+
+tree = ET.parse(xml_file_path)
+root = tree.getroot()
+
+print(f"Root Tag = <{root.tag}>")
+--------------------------------------------------------------------------------
+
+Output:
+(text)
+--------------------------------------------------------------------------------
+Root Tag = <book>
+--------------------------------------------------------------------------------
+
+root represents:
+(xml)
+--------------------------------------------------------------------------------
+<book>
+...
+</book>
+--------------------------------------------------------------------------------
+
+
+8. Getting the text
+
+You can find an element:
+(book-tree-read.py)
+--------------------------------------------------------------------------------
+name = root.find("name")
+print(f"Book name = \"{name.text}\"")
+--------------------------------------------------------------------------------
+
+Output:
+(text)
+--------------------------------------------------------------------------------
+Python Program Using Problem Solving Approach
+--------------------------------------------------------------------------------
+
+important:
+
+name
+is an Element Object, while
+
+name.text
+is the actual text.
+
+
+9. Getting Attributes
+
+
